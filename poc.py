@@ -14,6 +14,5 @@ def getHTMLContent(link):
 
 
 soup = getHTMLContent(URL)
-for tag in soup.find_all(True):
-	if tag.name == 'p':
-		print(tag.contents)
+for paragraph in soup.find_all('p'):
+	print(paragraph.text)
