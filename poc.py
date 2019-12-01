@@ -12,7 +12,6 @@ def getHTMLContent(link):
 	soup = BeautifulSoup(htmlResponse.content, 'html.parser')
 	return soup
 
-
 soup = getHTMLContent(URL)
 for paragraph in soup.find_all('p'):
 	print(paragraph.text)
