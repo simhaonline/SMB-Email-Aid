@@ -19,5 +19,7 @@ for paragraph in soup.find_all('p'):
 
 #for external_link in soup.find_all('a', href = True):
 #	raw = external_link['href']
-#	link = urllib.parse.urlparse(raw).hostname
-#	print(link)
+#	h_name = urllib.parse.urlparse(raw).hostname
+#	path = urllib.parse.urlparse(raw).path
+#	abs_path = str(h_name) + str(path);
+#	print(abs_path)
