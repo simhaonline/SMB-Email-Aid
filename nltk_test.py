@@ -3,18 +3,60 @@ import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
-nltk.download('punkt')
-nltk.download('wordnet')
 import argparse
 import collections
 from collections import defaultdict
 import pprint as pp
 
 
+# downloading NLTK parsing / tokenising libraries -- uncomment if not already downloaded
+# nltk.download('punkt')
+# nltk.download('wordnet')
 
-keywords = ["shop", "free", "%", "select", "deal", "sale", "major", "minimum", "terms", "offer", "store", "fast", "pickup", "everything", "shipping", "gift", "last", "end", "up to", "save", "feature", "product", "top", "clearance", "trending"]
+
+# Returns a dictionary containing of preset keywords : list of phrases from 
+# competitor sites (web scraped) containing keyword
+# Parameters: keywords -> preset keywords, user can add to these via 
+#             command line
+# Output: A dictionary containing keywords : phrases
+#  		  Key -> specific keyword
+#         Value -> list of strings (phrases) from competitor websites
+def find_competitor_phrases(industry, keywords, competitor_documents):
+	keyword_to_sent = defaultdict(list)
+	for document in competitor_documents:
+	 	# separate text from all documents into list of sentences
+		sent_tokenized_text = sent_tokenize(document)
+		for sent in sent_tokenized_text:
+			for keyword in keywords:
+				if keyword in sent:
+					keyword_to_sent[keyword].append(sent)
+
+	# pp.pprint(keyword_to_sent)
+
+	return keyword_to_sent
+
+
+# preset keywords
+keywords = ["shop", "free", "%", "select", "deal", "sale", "major", "minimum",
+            "terms", "offer", "store", "fast", "pickup", "everything",
+            "shipping", "gift", "last", "end", "up to", "save", "feature",
+            "product", "top", "clearance", "trending"]
+
+
+# accumulate all webscraped text from competitor homepages
+competitor_documents = []
+cwd = os.getcwd()+"/nltk_documents"
+
+for filename in os.listdir(cwd):
+	current = os.path.join(cwd, filename)
+	sample_text = ""
+	with open(current, 'r') as file:
+		sample_text += file.read().replace('\n', ' ')
+	competitor_documents.append(sample_text)
+
+
+# retrieve user input from command line for indsutry and additional keywords
 industry = ""
-
 parser = argparse.ArgumentParser(description="Retrieve dictionary of marketing terms and scraped phrases")
 parser.add_argument('-i', type=str, help="Enter industry as a sinngle string", required=True)
 parser.add_argument('-k', action='append', help="Enter keywords in sequence, each separated by -k", required=True)
@@ -25,29 +67,12 @@ for _, arg in parser.parse_args()._get_kwargs():
 		else:
 			industry = arg
 
-
-documents = []
-cwd = os.getcwd()+"/nltk_documents"
-
-for filename in os.listdir(cwd):
-	current = os.path.join(cwd, filename)
-	sample_text = ""
-	with open(current, 'r') as file:
-		sample_text += file.read().replace('\n', ' ')
-	documents.append(sample_text)
-
-keyword_to_sent = defaultdict(list)
-for document in documents:
-	sent_tokenized_text = sent_tokenize(document)
-	for sent in sent_tokenized_text:
-		for keyword in keywords:
-			if keyword in sent:
-				keyword_to_sent[keyword].append(sent)
-
-pp.pprint(keyword_to_sent)
+pp.pprint(find_competitor_phrases(industry, keywords, competitor_documents))
 
 
-# NLTK Tests:
+
+
+# IGNORE -- NLTK TESTS:
 # sent_tokenized_text = sent_tokenize(sample_text)
 # # for sent in sent_tokenized_text:
 # # 	print("SENTENCE:")
