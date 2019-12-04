@@ -25,6 +25,6 @@ if __name__ == '__main__':
 
     keyword_to_phrase = find_competitor_phrases(industry, keywords, competitor_content)
 
-    with open('test.csv', 'w') as f:
+    with open('poc.csv', 'w') as f:
         for key in keyword_to_phrase.keys():
             f.write("%s, %s\n"%(key, keyword_to_phrase[key]))
