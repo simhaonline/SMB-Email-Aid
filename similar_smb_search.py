@@ -47,10 +47,10 @@ def getSimilarSMBsWebsites(business, zipcode):
 	    if 'website' in website_result and name not in SMB_websites:
 	    	SMB_websites[name] = website_result['website']
 
-	print(SMB_websites)
+	#print(SMB_websites)
 	return SMB_websites
 
 # Used for testing, should be deleted
-business = input('Business: ')
-zipcode = input('Zipcode: ')
-getSimilarSMBsWebsites(business, zipcode)
+# business = input('Business: ')
+# zipcode = input('Zipcode: ')
+# getSimilarSMBsWebsites(business, zipcode)
