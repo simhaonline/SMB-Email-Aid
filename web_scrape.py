@@ -4,13 +4,9 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.parse
 
-def getHTMLContent(link):
+def getUsefulContent(link):
     htmlResponse = requests.get(link)
     soup = BeautifulSoup(htmlResponse.content, 'html.parser')
-    return soup
-
-def getUsefulContent(link):
-    soup = getHTMLContent(link)
     useful_content = ""
     for paragraph in soup.find_all('p'):
         useful_content += paragraph.text
