@@ -21,9 +21,10 @@ nltk.download('wordnet')
 # Parameters: keywords -> preset keywords, user can add to these via
 #             command line
 # Output: A dictionary containing keywords : phrases
-#  		  Key -> specific keyword
+#         Key -> specific keyword
 #         Value -> list of strings (phrases) from competitor websites
-def find_competitor_phrases(industry: str, keywords, competitor_documents):
+def find_competitor_phrases(industry: str, keywords: list,
+                            competitor_documents: str):
 
     keyword_to_sent = defaultdict(list)
 
