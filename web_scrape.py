@@ -4,8 +4,8 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.parse
 
-def getUsefulContent(link):
-    htmlResponse = requests.get(link)
+def getUsefulContent(URL: str) -> str:
+    htmlResponse = requests.get(URL)
     soup = BeautifulSoup(htmlResponse.content, 'html.parser')
     useful_content = ""
     for paragraph in soup.find_all('p'):

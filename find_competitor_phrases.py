@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import os
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
@@ -14,7 +16,6 @@ import pprint as pp
 nltk.download('punkt')
 nltk.download('wordnet')
 
-
 # Returns a dictionary containing of preset keywords : list of phrases from
 # competitor sites (web scraped) containing keyword
 # Parameters: keywords -> preset keywords, user can add to these via
@@ -22,15 +23,17 @@ nltk.download('wordnet')
 # Output: A dictionary containing keywords : phrases
 #  		  Key -> specific keyword
 #         Value -> list of strings (phrases) from competitor websites
-def find_competitor_phrases(industry, keywords, competitor_documents):
-	keyword_to_sent = defaultdict(list)
- 	# separate text from all documents into list of sentences
-	sent_tokenized_text = sent_tokenize(competitor_documents)
-	for sent in sent_tokenized_text:
-		for keyword in keywords:
-			if keyword in sent:
-				keyword_to_sent[keyword].append(sent)
-	return keyword_to_sent
+def find_competitor_phrases(industry: str, keywords, competitor_documents):
+
+    keyword_to_sent = defaultdict(list)
+
+    # separate text from all documents into list of sentences
+    sent_tokenized_text = sent_tokenize(competitor_documents)
+    for sent in sent_tokenized_text:
+        for keyword in keywords:
+            if keyword in sent:
+                keyword_to_sent[keyword].append(sent)
+    return keyword_to_sent
 
 
 # accumulate all webscraped text from competitor homepages
