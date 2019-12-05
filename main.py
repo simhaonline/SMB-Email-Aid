@@ -13,16 +13,19 @@ if __name__ == '__main__':
                 "product", "top", "clearance", "trending"]
 
     # User input for industry, zipcode, and desired keywords
-    industry = input('Industry: ')
-    zipcode = input('Zipcode: ')
-    user_keywords = input('Keywords (separate by space): ')
+    industry = input('\nIndustry: ')
+    zipcode = input('\nZipcode: ')
+    user_keywords = input('\nKeywords (separate by space): ')
     keywords += user_keywords.split()
 
     # Fetch a dictionary of business and their website links through Google
     # Maps API
+    print('\nSearching for competitor websites...\n\n')
     business_dict = getSimilarSMBsWebsites(industry, zipcode)
+    print('Found ' + str(len(business_dict)) + ' websites\n\n')
 
     # Web scrape the links from above and get useful contents
+    print('Web scraping...\n\n')
     competitor_content = ""
     for business_name in business_dict:
         business_URL = business_dict[business_name]
@@ -32,8 +35,9 @@ if __name__ == '__main__':
 
     # NLP: Dictonary for key-value pairs of keyword and phrases that contain
     # the keyword
+    print('Fetching phrases...\n\n')
     keyword_to_phrase = find_competitor_phrases(industry, keywords, competitor_content)
-    pp.pprint(keyword_to_phrase)
+    print('Done!\n')
 
     # Write the key-value pairs to a .txt file
     with open('poc.txt', 'wt') as out:
