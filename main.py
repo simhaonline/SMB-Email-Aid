@@ -21,7 +21,7 @@ if __name__ == '__main__':
     # Fetch a dictionary of business and their website links through Google
     # Maps API
     print('\nSearching for competitor websites...\n\n')
-    business_dict = getSimilarSMBsWebsites(industry, zipcode)
+    business_dict = getSimilarSMBsWebsites(industry, zipcode, PUT_GOOGLE_MAPS_API_KEY_HERE)
     print('Found ' + str(len(business_dict)) + ' websites\n\n')
 
     # Web scrape the links from above and get useful contents

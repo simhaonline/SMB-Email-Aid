@@ -9,9 +9,7 @@ import requests, json
 # Output: A dictionary containing the websites of SMBs where:
 #         Key -> Name of similar SMB
 #         Value -> Website of similar SMB
-def getSimilarSMBsWebsites(business: str, zipcode: str) -> dict:
-    # API KEY
-    api_key = 'AIzaSyAJLAI5tfOswdBsNJNksDc3x1gXsMiMXVo'
+def getSimilarSMBsWebsites(business: str, zipcode: str, api_key: str) -> dict:
 
     # Building query
     query = business + ' in ' + zipcode
