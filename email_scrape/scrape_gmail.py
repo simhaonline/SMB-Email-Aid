@@ -14,6 +14,8 @@ import getpass
 import email
 import email.header
 import datetime
+from bs4 import BeautifulSoup
+import urllib.parse
 
 
 EMAIL_ACCOUNT = "yazzberryyam@gmail.com"
@@ -45,8 +47,13 @@ def process_mailbox(M):
         msg = email.message_from_bytes(data[0][1])
         hdr = email.header.make_header(email.header.decode_header(msg['Subject']))
         subject = str(hdr)
-        print('Message %s: %s' % (num, subject))
-        print('Raw Date:', msg['Date'])
+        soup = BeautifulSoup(msg, 'html.parser')
+        useful_content = ""
+        for paragraph in soup.find_all('p'):
+            useful_content += paragraph.text
+        print(useful_content)
+        #print('Message %s: %s' % (num, subject))
+        #print('Raw Date:', msg['Date'])
         # Now convert to local date-time
         date_tuple = email.utils.parsedate_tz(msg['Date'])
         if date_tuple:
