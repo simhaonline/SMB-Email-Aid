@@ -15,7 +15,6 @@ google-auth-httplib2 = "*"
 google-auth-oauthlib = "*"
 apiclient = "*"
 spacy = "*"
-functools = "*"
 pylint = "*"
 
 [requires]
