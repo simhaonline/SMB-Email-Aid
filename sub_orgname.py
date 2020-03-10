@@ -1,10 +1,20 @@
-import spacy
-from functools import reduce
+'''
+    Takes a text and a company name and replaces all org's in the text with the
+    company name.
+    Uses spacy model.
+'''
 
-nlp = spacy.load('en_core_web_lg')
+from functools import reduce
+import spacy
+
+NLP = spacy.load('en_core_web_lg')
 
 def sub_org(text, company):
-    doc = nlp(text)
+    '''
+        sub_org: substitute all occurances of an ORG in the text with the given
+                    company
+    '''
+    doc = NLP(text)
     names_in_text = [(entity.text, company)  for entity in doc.ents if entity.label_ in ['ORG']]
     print(names_in_text)
 
