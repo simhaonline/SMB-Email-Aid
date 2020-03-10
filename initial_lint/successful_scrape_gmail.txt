@@ -1,0 +1,25 @@
+************* Module successful_scrape_gmail
+successful_scrape_gmail.py:56:0: C0330: Wrong continued indentation (add 14 spaces).
+                                         pageToken=page_token).execute()
+                                         ^             | (bad-continuation)
+successful_scrape_gmail.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+successful_scrape_gmail.py:22:0: C0103: Function name "GetMessage" doesn't conform to snake_case naming style (invalid-name)
+successful_scrape_gmail.py:22:0: C0116: Missing function or method docstring (missing-function-docstring)
+successful_scrape_gmail.py:30:11: E0602: Undefined variable 'errors' (undefined-variable)
+successful_scrape_gmail.py:44:0: C0103: Function name "ListMessagesMatchingQuery" doesn't conform to snake_case naming style (invalid-name)
+successful_scrape_gmail.py:44:0: C0116: Missing function or method docstring (missing-function-docstring)
+successful_scrape_gmail.py:60:11: E0602: Undefined variable 'errors' (undefined-variable)
+successful_scrape_gmail.py:91:8: W0622: Redefining built-in 'id' (redefined-builtin)
+successful_scrape_gmail.py:63:0: C0116: Missing function or method docstring (missing-function-docstring)
+successful_scrape_gmail.py:88:4: C0103: Variable name "fo" doesn't conform to snake_case naming style (invalid-name)
+successful_scrape_gmail.py:91:8: C0103: Variable name "id" doesn't conform to snake_case naming style (invalid-name)
+successful_scrape_gmail.py:4:0: W0611: Unused import apiclient (unused-import)
+successful_scrape_gmail.py:5:0: W0611: Unused import urllib.error (unused-import)
+successful_scrape_gmail.py:6:0: W0611: Unused import pprint (unused-import)
+successful_scrape_gmail.py:5:0: C0411: standard import "import urllib.error" should be placed before "import apiclient" (wrong-import-order)
+successful_scrape_gmail.py:6:0: C0411: standard import "import pprint" should be placed before "import apiclient" (wrong-import-order)
+successful_scrape_gmail.py:7:0: C0411: standard import "import html" should be placed before "import apiclient" (wrong-import-order)
+
+-----------------------------------
+Your code has been rated at 5.19/10
+

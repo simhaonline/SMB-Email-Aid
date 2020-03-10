@@ -1,0 +1,9 @@
+************* Module sub_orgname
+sub_orgname.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+sub_orgname.py:4:0: C0103: Constant name "nlp" doesn't conform to UPPER_CASE naming style (invalid-name)
+sub_orgname.py:6:0: C0116: Missing function or method docstring (missing-function-docstring)
+sub_orgname.py:2:0: C0411: standard import "from functools import reduce" should be placed before "import spacy" (wrong-import-order)
+
+-------------------------------------------------------------------
+Your code has been rated at 6.00/10 (previous run: 10.00/10, -4.00)
+
