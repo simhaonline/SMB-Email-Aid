@@ -100,7 +100,7 @@ def main():
 
     mails = ListMessagesMatchingQuery(service, "me")
 
-    fo = open("marketing_phrases.txt", "w")
+    fo = open("../training_data/marketing_phrases.txt", "w")
 
     counter = 0
 
