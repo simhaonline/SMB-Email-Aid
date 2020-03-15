@@ -16,6 +16,7 @@ apiclient = "*"
 spacy = "*"
 pylint = "*"
 en-core-web-lg = {file = "https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-2.2.5/en_core_web_lg-2.2.5.tar.gz"}
+gpt-2-simple = "*"
 
 [requires]
 python_version = "3.7"
