@@ -5,6 +5,7 @@ import apiclient
 import urllib.error
 import pprint
 import html
+from datetime import *
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -23,8 +24,8 @@ def GetMessage(service, user_id, msg_id):
     try:
         message = service.users().messages().get(userId=user_id,
                                                  id=msg_id).execute()
-        print(message['id'])
         text_snippet = html.unescape(message['snippet'])
+
         #print('Message snippet: %s' % text_snippet)
         return text_snippet
     except errors.HttpError as error:
@@ -41,24 +42,38 @@ def GetMessage(service, user_id, msg_id):
 # Returns  : List of Messages that match the criteria of the query. Note that
 #            the returned list contains Message IDs, you must use get with the
 #            appropriate ID to get the details of a Message.
-def ListMessagesMatchingQuery(service, user_id, query=''):
+def ListMessagesMatchingQuery(service, user_id):
 
-    try:
-        response = service.users().messages().list(userId=user_id,
-                                                   q=query).execute()
-        messages = []
-        if 'messages' in response:
-            messages.extend(response['messages'])
+    today = date.today()
+    yesterday = today - timedelta(1)
+    query = "in:anywhere"
 
-        while 'nextPageToken' in response:
-            page_token = response['nextPageToken']
-            response = service.users().messages().list(userId=user_id, q=query,
-                                         pageToken=page_token).execute()
+    response = service.users().messages().list(userId=user_id,
+                                               q=query,
+                                               maxResults=511).execute()
+
+    messages = []
+    if 'messages' in response:
         messages.extend(response['messages'])
 
-        return messages
-    except errors.HttpError as error:
-        print('An error occurred: %s' % error)
+    pageToken = None
+    if 'nextPageToken' in response:
+        pageToken = response['nextPageToken']
+
+    while pageToken:
+        response = service.users().messages().list(userId=user_id,
+                                                   q=query,
+                                                   maxResults=511,
+                                                   pageToken=pageToken)        \
+                                                   .execute()
+        messages.extend(response['messages'])
+        if 'nextPageToken' in response:
+            pageToken = response['nextPageToken']
+        else:
+            break
+
+    return messages
+
 
 def main():
 
@@ -83,25 +98,21 @@ def main():
 
     service = build('gmail', 'v1', credentials=creds)
 
-    mails = ListMessagesMatchingQuery(service, "me", '')
+    mails = ListMessagesMatchingQuery(service, "me")
 
     fo = open("marketing_phrases.txt", "w")
+
+    counter = 0
 
     for mail in mails:
         id = mail['id']
         message = GetMessage(service, "me", id)
         fo.write(message)
+        counter = counter + 1
+        print(counter)
 
     fo.close()
-    # # Call the Gmail API
-    # results = service.users().labels().list(userId='me').execute()
-    # labels = results.get('labels', [])
-    # if not labels:
-    #     print('No labels found.')
-    # else:
-    #     print('Labels:')
-    #     for label in labels:
-    #         print(label['name'])
+
 
 if __name__ == '__main__':
     main()
