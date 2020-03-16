@@ -8,9 +8,6 @@ from functools import reduce
 import spacy
 import os
 
-# try:
-#
-# os.system('python -m ')
 NLP = spacy.load('en_core_web_lg')
 
 def sub_org(text, company):
