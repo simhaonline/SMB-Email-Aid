@@ -5,7 +5,6 @@ import apiclient
 import urllib.error
 import pprint
 import html
-from datetime import *
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -24,10 +23,9 @@ def GetMessage(service, user_id, msg_id):
     try:
         message = service.users().messages().get(userId=user_id,
                                                  id=msg_id).execute()
-        text_snippet = html.unescape(message['snippet'])
 
         #print('Message snippet: %s' % text_snippet)
-        return text_snippet
+        return message['snippet']
     except errors.HttpError as error:
         print('An error occurred: %s' % error)
 
@@ -64,7 +62,7 @@ def ListMessagesMatchingQuery(service, user_id):
         response = service.users().messages().list(userId=user_id,
                                                    q=query,
                                                    maxResults=511,
-                                                   pageToken=pageToken)        \
+                                                   pageToken=pageToken)\
                                                    .execute()
         messages.extend(response['messages'])
         if 'nextPageToken' in response:
@@ -112,7 +110,6 @@ def main():
         print(counter)
 
     fo.close()
-
 
 if __name__ == '__main__':
     main()
