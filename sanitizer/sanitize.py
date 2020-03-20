@@ -1,9 +1,30 @@
 #!/usr/bin/python3
 
+from functools import reduce
+import spacy
+import os
 import nltk
 import re
 import html
-from sub_orgname import *
+
+NLP = spacy.load('en_core_web_lg')
+
+'''
+    Takes a text and a company name and replaces all org's in the text with the
+    company name.
+    Uses spacy model.
+'''
+def sub_org(text, company):
+    '''
+        sub_org: substitute all occurances of an ORG in the text with the given
+                    company
+    '''
+    doc = NLP(text)
+    names_in_text = [(entity.text, company)  for entity in doc.ents if entity.label_ in ['ORG']]
+    print(names_in_text)
+
+    replaced_text = reduce(lambda x, kv: x.replace(*kv), names_in_text, text)
+    print(replaced_text)
 
 def sanitize(text):
 
@@ -11,28 +32,17 @@ def sanitize(text):
 
 	split_data = nltk.tokenize.sent_tokenize(text)
 
+	text = ""
+
 	for i in range(len(split_data)):
-		n_phrase = split_data[i].strip()
-		n_phrase = re.sub(r'[^\x00-\x7F]+',' ', n_phrase)
-		n_phrase = ' '.join(n_phrase.split())
-		split_data[i] = n_phrase
-	return str(split_data)
+		phrase = split_data[i].strip()
+		phrase = re.sub(r'[^\x00-\x7F]+',' ', phrase)
+		phrase = ' '.join(phrase.split())
+		text = text + phrase
+
+	text = unescape_html(text)
+
+	return text
 
 def unescape_html(text):
 	return html.unescape(text)
-
-# file = input('File: ')
-def main():
-	file = open("../training_data/marketing_phrases.txt")
-	text = file.read()
-	text = sanitize(text)
-	text = unescape_html(text)
-
-	sanitized_filename = "../training_data/sanitized_data.txt"
-	try:
-		sanitized_file = open(sanitized_filename, "w")
-		sanitized_file.write(text)
-	finally:
-		sanitized_file.close()
-
-main()
