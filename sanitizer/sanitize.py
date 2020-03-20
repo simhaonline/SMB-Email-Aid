@@ -20,29 +20,41 @@ def sub_org(text, company):
                     company
     '''
     doc = NLP(text)
-    names_in_text = [(entity.text, company)  for entity in doc.ents if entity.label_ in ['ORG']]
-    print(names_in_text)
+    names_in_text = [(entity.text, company) for entity in doc.ents
+                                            if entity.label_ in ['ORG']]
 
     replaced_text = reduce(lambda x, kv: x.replace(*kv), names_in_text, text)
-    print(replaced_text)
+
+    return replaced_text
 
 def sanitize(text):
 
-	nltk.download('punkt')
+    nltk.download('punkt')
+    split_data = nltk.tokenize.sent_tokenize(text)
 
-	split_data = nltk.tokenize.sent_tokenize(text)
+    text = ""
 
-	text = ""
+    for i in range(len(split_data)):
+        phrase = split_data[i].strip()
+        phrase = re.sub(r'[^\x00-\x7F]+',' ', phrase)
+        phrase = ' '.join(phrase.split())
+        if contain_junk(phrase):
+            pass
+        else:
+            text = text + phrase
 
-	for i in range(len(split_data)):
-		phrase = split_data[i].strip()
-		phrase = re.sub(r'[^\x00-\x7F]+',' ', phrase)
-		phrase = ' '.join(phrase.split())
-		text = text + phrase
+    text = unescape_html(text)
 
-	text = unescape_html(text)
-
-	return text
+    return text
 
 def unescape_html(text):
-	return html.unescape(text)
+    return html.unescape(text)
+
+def contain_junk(text):
+    if "COVID" in text:
+        return True
+    if "Jazzberry" in text:
+        return True
+    if "yazzberry" in text:
+        return True
+    return False
