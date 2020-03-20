@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # https://github.com/minimaxir/gpt-2-simple
 
 import gpt_2_simple as gpt2

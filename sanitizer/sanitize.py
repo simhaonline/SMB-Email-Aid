@@ -5,8 +5,6 @@ import re
 import html
 from sub_orgname import *
 
-
-
 def sanitize(text):
 
 	nltk.download('punkt')

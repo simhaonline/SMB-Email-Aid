@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 '''
     Takes a text and a company name and replaces all org's in the text with the
     company name.
