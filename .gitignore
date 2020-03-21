@@ -1,3 +1,5 @@
+# MacOS Specific
 .DS_Store
+
+# Python Specific
 __pycache__
-model.*

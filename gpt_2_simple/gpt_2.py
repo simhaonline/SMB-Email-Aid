@@ -20,6 +20,11 @@ def gpt_2_simple_train(file_name: str):
                   model_name=model_name,
                   steps=1000)    # steps is max number of training steps
 
+def gpt_2_simple_generate():
+
+    sess = gpt2.start_tf_sess()
+    gpt2.load_gpt2(sess)
     gpt2.generate(sess)
 
-gpt_2_simple_train("marketing_phrases.txt")
+#gpt_2_simple_train("marketing_phrases.txt")
+gpt_2_simple_generate()
