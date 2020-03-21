@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     # Sanitize
     text = sanitize(text)
-    text = sub_org(text, "SMBORG")
+    #text = sub_org(text, "SMBORG")
 
     # Write the result
     try:

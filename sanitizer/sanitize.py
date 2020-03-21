@@ -1,31 +1,9 @@
 #!/usr/bin/python3
 
-from functools import reduce
-import spacy
 import os
 import nltk
 import re
 import html
-
-NLP = spacy.load('en_core_web_lg')
-
-'''
-    Takes a text and a company name and replaces all org's in the text with the
-    company name.
-    Uses spacy model.
-'''
-def sub_org(text, company):
-    '''
-        sub_org: substitute all occurances of an ORG in the text with the given
-                    company
-    '''
-    doc = NLP(text)
-    names_in_text = [(entity.text, company) for entity in doc.ents
-                                            if entity.label_ in ['ORG']]
-
-    replaced_text = reduce(lambda x, kv: x.replace(*kv), names_in_text, text)
-
-    return replaced_text
 
 def sanitize(text):
 
@@ -38,23 +16,24 @@ def sanitize(text):
         phrase = split_data[i].strip()
         phrase = re.sub(r'[^\x00-\x7F]+',' ', phrase)
         phrase = ' '.join(phrase.split())
+
         if contain_junk(phrase):
             pass
         else:
+            print(f"{phrase}\n")
             text = text + phrase
 
-    text = unescape_html(text)
+    text = html.unescape(text)
 
     return text
 
-def unescape_html(text):
-    return html.unescape(text)
-
 def contain_junk(text):
-    if "COVID" in text:
+    if "COVID"                  in text or \
+       "Jazzberry"              in text or \
+       "yazzberryyam@gmail.com" in text or \
+       "click"                  in text or \
+       "Click"                  in text or \
+       "All Rights"             in text:
         return True
-    if "Jazzberry" in text:
-        return True
-    if "yazzberry" in text:
-        return True
-    return False
+    else:
+        return False
