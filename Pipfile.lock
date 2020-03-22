@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b1afd704f5b32316cf3b9c7c13f8ac28660997f49fc1caa8f3b14ea896580b23"
+            "sha256": "a2509269230e3b613d2626d1eb2902e7154833266d6796b79fefac7beb309ce9"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -28,13 +28,6 @@
             ],
             "index": "pypi",
             "version": "==1.0.4"
-        },
-        "asgiref": {
-            "hashes": [
-                "sha256:3e4192eaec0758b99722f0b0666d5fbfaa713054d92e8de5b58ba84ec5ce696f",
-                "sha256:c8f49dd3b42edcc51d09dd2eea8a92b3cfc987ff7e6486be734b4d0cbfd5d315"
-            ],
-            "version": "==3.2.5"
         },
         "astor": {
             "hashes": [
@@ -130,14 +123,6 @@
                 "sha256:f4f19af4bca81f11922508a9dcf30ce1d2aee4972af9f81ce8e5331a6f46f5e1"
             ],
             "version": "==2.0.3"
-        },
-        "django": {
-            "hashes": [
-                "sha256:50b781f6cbeb98f673aa76ed8e572a019a45e52bdd4ad09001072dfd91ab07c8",
-                "sha256:89e451bfbb815280b137e33e454ddd56481fdaa6334054e6e031041ee1eda360"
-            ],
-            "index": "pypi",
-            "version": "==3.0.4"
         },
         "en-core-web-lg": {
             "file": "https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-2.2.5/en_core_web_lg-2.2.5.tar.gz"
@@ -597,13 +582,6 @@
             ],
             "index": "pypi",
             "version": "==2.2.4"
-        },
-        "sqlparse": {
-            "hashes": [
-                "sha256:022fb9c87b524d1f7862b3037e541f68597a730a8843245c349fc93e1643dc4e",
-                "sha256:e162203737712307dfe78860cc56c8da8a852ab2ee33750e33aeadf38d12c548"
-            ],
-            "version": "==0.3.1"
         },
         "srsly": {
             "hashes": [
