@@ -37,3 +37,29 @@ def contain_junk(text):
         return True
     else:
         return False
+
+def main():
+
+    # Filepaths
+    original_filename = "unsanitzed_data.txt"
+    sanitized_filename = "sanitized_data.txt"
+
+    # Read unsanitized, original data
+    try:
+        original_file = open(original_filename)
+        text = original_file.read()
+    finally:
+        original_file.close()
+
+    # Sanitize
+    text = sanitize(text)
+
+    # Write the result
+    try:
+        sanitized_file = open(sanitized_filename, "w")
+        sanitized_file.write(text)
+    finally:
+        sanitized_file.close()
+
+if __name__ == '__main__':
+    main()
