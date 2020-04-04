@@ -44,8 +44,6 @@ def GetMessage(service, user_id, msg_id):
 #            appropriate ID to get the details of a Message.
 def ListMessagesMatchingQuery(service, user_id):
 
-    today = date.today()
-    yesterday = today - timedelta(1)
     query = "in:anywhere"
 
     response = service.users().messages().list(userId=user_id,
@@ -99,9 +97,10 @@ def main():
     service = build('gmail', 'v1', credentials=creds)
 
     mails = ListMessagesMatchingQuery(service, "me")
+    print(f"There are {len(mails)} mails.")
 
-    fo = open("../training_data/marketing_phrases.txt", "w")
-
+    fo = open("unsanitized_data.txt", "w")
+    print("Scraping...")
     counter = 0
 
     for mail in mails:

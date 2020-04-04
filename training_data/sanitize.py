@@ -28,25 +28,22 @@ def sanitize(text):
     return text
 
 def contain_junk(text):
-    if "COVID"                  in text or \
-       "Jazzberry"              in text or \
-       "yazzberryyam@gmail.com" in text or \
-       "click"                  in text or \
-       "Click"                  in text or \
-       "All Rights"             in text:
-        return True
-    else:
-        return False
+    words = ["COVID", "Jazzberry", "yazzberryyam@gmail.com", "click", "Click",
+             "All Rights", "Ruby"]
+
+    for word in words:
+        if word in text:
+            return True
 
 def main():
 
     # Filepaths
-    original_filename = "unsanitzed_data.txt"
+    original_filename = "unsanitized_data.txt"
     sanitized_filename = "sanitized_data.txt"
 
     # Read unsanitized, original data
+    original_file = open(original_filename)
     try:
-        original_file = open(original_filename)
         text = original_file.read()
     finally:
         original_file.close()

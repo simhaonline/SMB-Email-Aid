@@ -6,9 +6,8 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-requests = "*"
-bs4 = "*"
-nltk = "*"
+tensorflow = "~=1.15"
+gpt-2-simple = "*"
 
 [requires]
 python_version = "3.7"
